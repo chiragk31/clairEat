@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SmartEat - Log Meal</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#9bf6ba",
+                    "error-container": "#ffdad6",
+                    "primary": "#006036",
+                    "tertiary-fixed": "#ffdada",
+                    "on-error": "#ffffff",
+                    "surface-container": "#edeeeb",
+                    "inverse-surface": "#2e312f",
+                    "outline-variant": "#bec9be",
+                    "tertiary-container": "#a94e56",
+                    "inverse-primary": "#80d9a0",
+                    "secondary-fixed-dim": "#ffb955",
+                    "surface-bright": "#f9faf7",
+                    "on-primary-container": "#abffc6",
+                    "on-surface-variant": "#3f4941",
+                    "background": "#f9faf7",
+                    "secondary-fixed": "#ffddb4",
+                    "on-secondary": "#ffffff",
+                    "outline": "#6f7a70",
+                    "on-secondary-container": "#6b4500",
+                    "on-primary-fixed-variant": "#00522e",
+                    "surface-container-high": "#e7e8e6",
+                    "surface-container-low": "#f3f4f1",
+                    "surface-variant": "#e2e3e0",
+                    "tertiary": "#8b373f",
+                    "on-secondary-fixed": "#291800",
+                    "on-tertiary-fixed": "#40000d",
+                    "secondary": "#835500",
+                    "primary-container": "#1a7a4a",
+                    "on-primary-fixed": "#00210f",
+                    "on-primary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-surface": "#191c1b",
+                    "tertiary-fixed-dim": "#ffb3b6",
+                    "surface-dim": "#d9dad8",
+                    "inverse-on-surface": "#f0f1ee",
+                    "surface-container-highest": "#e2e3e0",
+                    "secondary-container": "#feae2c",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "surface": "#f9faf7",
+                    "surface-tint": "#006d3f",
+                    "primary-fixed-dim": "#80d9a0",
+                    "on-secondary-fixed-variant": "#633f00",
+                    "on-tertiary-fixed-variant": "#7c2b34",
+                    "on-background": "#191c1b",
+                    "on-tertiary-container": "#ffe7e7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Manrope', sans-serif; }
+        .diffusion-shadow { box-shadow: 0 12px 32px rgba(25, 28, 27, 0.04); }
+        .glass-panel { background: rgba(249, 250, 247, 0.8); backdrop-filter: blur(24px); }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #006036;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen">
+<!-- Sidebar Navigation Shell -->
+<nav class="fixed left-0 top-0 h-full flex flex-col py-8 px-4 bg-emerald-50/50 dark:bg-stone-900/50 backdrop-blur-xl h-full w-64 border-r border-stone-200/50 dark:border-stone-800/50 z-50">
+<div class="mb-10 px-4">
+<span class="text-2xl font-bold tracking-tight text-emerald-900 dark:text-emerald-50">SmartEat</span>
+<p class="text-[10px] uppercase tracking-widest text-stone-500 font-bold mt-1">Premium Wellness</p>
+</div>
+<div class="flex flex-col gap-1">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 text-stone-500 dark:text-stone-400 font-medium hover:text-emerald-800 hover:bg-emerald-50 dark:hover:bg-emerald-900/10" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- Log Meal (Active) -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 translate-x-1 text-emerald-900 dark:text-emerald-400 border-l-4 border-emerald-700 dark:border-emerald-500 font-bold bg-emerald-100/50 dark:bg-emerald-900/20" href="#">
+<span class="material-symbols-outlined" data-icon="add_a_photo" style="font-variation-settings: 'FILL' 1;">add_a_photo</span>
+<span>Log Meal</span>
+</a>
+<!-- Meal Plan -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 text-stone-500 dark:text-stone-400 font-medium hover:text-emerald-800 hover:bg-emerald-50 dark:hover:bg-emerald-900/10" href="#">
+<span class="material-symbols-outlined" data-icon="restaurant_menu">restaurant_menu</span>
+<span>Meal Plan</span>
+</a>
+<!-- AI Coach -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 text-stone-500 dark:text-stone-400 font-medium hover:text-emerald-800 hover:bg-emerald-50 dark:hover:bg-emerald-900/10" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span>AI Coach</span>
+</a>
+<!-- Analytics -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 text-stone-500 dark:text-stone-400 font-medium hover:text-emerald-800 hover:bg-emerald-50 dark:hover:bg-emerald-900/10" href="#">
+<span class="material-symbols-outlined" data-icon="leaderboard">leaderboard</span>
+<span>Analytics</span>
+</a>
+</div>
+<div class="mt-auto px-4 border-t border-stone-200/50 pt-6">
+<div class="flex items-center gap-3">
+<img alt="User profile" class="w-10 h-10 rounded-full object-cover" data-alt="Close up professional portrait of a healthy smiling man in soft daylight against a neutral studio background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvx-d0jvVf48VzlGLroP0kdbKKRg_CjuM-JeiFeoUZPdoq17Sbrdyva7_Q5YKcGRL808DkHng9pSFq24SmqL27f7d-czFXjVUfVatTNQFL0_mAI7ktCxf6X77n4oQHkNdQ3IAYseBf_iG_SOlkyff2vjuKpfInFH-cbGKWu0ZVHdbpyli_rwucknd-W_yDZAe7PBJQTKZ-4W88igRC0PskCF3aWDRhL9KIrZkvWzheXeggsvN4kxJZ1jLlsYkWs5wPDLw3uGT5Sjjw"/>
+<div>
+<p class="text-sm font-bold text-on-surface">Alex Rivera</p>
+<p class="text-xs text-stone-500">Premium Member</p>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="ml-64 p-8 max-w-7xl mx-auto">
+<!-- Header Section -->
+<header class="flex justify-between items-end mb-12">
+<div>
+<h1 class="text-4xl font-extrabold tracking-tight text-on-surface mb-2">New Entry</h1>
+<p class="text-stone-500 font-medium">Fine-tuning your nutritional narrative for today.</p>
+</div>
+<div class="flex items-center gap-4 text-sm font-bold text-primary">
+<span class="px-4 py-2 bg-surface-container-low rounded-full">Thursday, Oct 24</span>
+</div>
+</header>
+<div class="grid grid-cols-12 gap-8">
+<!-- Left Column: Search & Discovery -->
+<div class="col-span-12 lg:col-span-7 space-y-8">
+<!-- Meal Type Selector -->
+<div class="bg-surface-container-low p-2 rounded-2xl flex flex-wrap gap-2">
+<button class="flex-1 py-3 px-4 rounded-xl font-bold text-sm bg-surface-container-lowest text-primary transition-all duration-300">Breakfast</button>
+<button class="flex-1 py-3 px-4 rounded-xl font-medium text-sm text-stone-500 hover:bg-emerald-50/50 transition-all duration-300">Lunch</button>
+<button class="flex-1 py-3 px-4 rounded-xl font-medium text-sm text-stone-500 hover:bg-emerald-50/50 transition-all duration-300">Dinner</button>
+<button class="flex-1 py-3 px-4 rounded-xl font-medium text-sm text-stone-500 hover:bg-emerald-50/50 transition-all duration-300">Snack</button>
+<button class="flex-1 py-3 px-4 rounded-xl font-medium text-sm text-stone-500 hover:bg-emerald-50/50 transition-all duration-300">Pre-Workout</button>
+<button class="flex-1 py-3 px-4 rounded-xl font-medium text-sm text-stone-500 hover:bg-emerald-50/50 transition-all duration-300">Post-Workout</button>
+</div>
+<!-- Large Search Bar -->
+<div class="relative group">
+<div class="absolute inset-y-0 left-6 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-stone-400 group-focus-within:text-primary transition-colors" data-icon="search">search</span>
+</div>
+<input class="w-full h-16 pl-16 pr-16 bg-surface-container-high border-none rounded-xl text-lg font-medium focus:ring-4 focus:ring-primary/10 transition-all placeholder:text-stone-400" placeholder="Search food or scan barcode…" type="text"/>
+<button class="absolute inset-y-0 right-4 flex items-center px-2">
+<span class="material-symbols-outlined text-primary p-2 hover:bg-primary/10 rounded-full transition-colors" data-icon="add_a_photo" title="Scan barcode">add_a_photo</span>
+</button>
+</div>
+<!-- Search Results -->
+<div class="space-y-4">
+<h3 class="text-xs uppercase tracking-widest font-bold text-stone-500 px-2">Commonly Logged</h3>
+<div class="grid gap-3">
+<!-- Result Item -->
+<div class="group flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl diffusion-shadow hover:translate-y-[-2px] transition-all duration-300 border border-outline-variant/10">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-emerald-50 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="restaurant">restaurant</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Avocado Sourdough Toast</p>
+<p class="text-xs text-stone-500">245 kcal per 100g • Cafe Style</p>
+</div>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 bg-secondary-fixed text-on-secondary-fixed text-sm font-bold rounded-full hover:shadow-md transition-all">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+                                Add
+                            </button>
+</div>
+<!-- Result Item -->
+<div class="group flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl diffusion-shadow hover:translate-y-[-2px] transition-all duration-300 border border-outline-variant/10">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-emerald-50 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="egg_alt">egg_alt</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Large Poached Egg</p>
+<p class="text-xs text-stone-500">155 kcal per 100g • Organic</p>
+</div>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 bg-secondary-fixed text-on-secondary-fixed text-sm font-bold rounded-full hover:shadow-md transition-all">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+                                Add
+                            </button>
+</div>
+<!-- Result Item -->
+<div class="group flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl diffusion-shadow hover:translate-y-[-2px] transition-all duration-300 border border-outline-variant/10">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-emerald-50 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="coffee">coffee</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Black Coffee</p>
+<p class="text-xs text-stone-500">2 kcal per 100g • Arabica</p>
+</div>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 bg-secondary-fixed text-on-secondary-fixed text-sm font-bold rounded-full hover:shadow-md transition-all">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+                                Add
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Current Log & Journaling -->
+<div class="col-span-12 lg:col-span-5 space-y-8">
+<!-- Logged Items Summary -->
+<section class="bg-surface-container-lowest p-8 rounded-lg border border-outline-variant/10 diffusion-shadow">
+<h2 class="text-2xl font-bold mb-6">Today's Breakfast</h2>
+<div class="space-y-6">
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="border-b border-surface-container text-stone-400 text-[10px] uppercase tracking-widest font-bold">
+<tr>
+<th class="pb-3">Food</th>
+<th class="pb-3 text-center">Qty (g)</th>
+<th class="pb-3 text-right">Cals</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<tr class="group">
+<td class="py-4 font-semibold text-on-surface">Organic Blueberries</td>
+<td class="py-4 text-center">
+<input class="w-16 bg-surface-container-low border-none rounded-md text-center py-1 text-sm focus:ring-1 focus:ring-primary" type="number" value="125"/>
+</td>
+<td class="py-4 text-right font-medium">71</td>
+</tr>
+<tr class="group">
+<td class="py-4 font-semibold text-on-surface">Greek Yogurt (Full Fat)</td>
+<td class="py-4 text-center">
+<input class="w-16 bg-surface-container-low border-none rounded-md text-center py-1 text-sm focus:ring-1 focus:ring-primary" type="number" value="200"/>
+</td>
+<td class="py-4 text-right font-medium">194</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Macro Pulse -->
+<div class="grid grid-cols-4 gap-2 pt-6 border-t border-surface-container text-center">
+<div>
+<p class="text-xs text-stone-500 mb-1">Calories</p>
+<p class="text-lg font-bold text-primary">265</p>
+</div>
+<div>
+<p class="text-xs text-stone-500 mb-1">Protein</p>
+<p class="text-lg font-bold text-on-surface">18g</p>
+</div>
+<div>
+<p class="text-xs text-stone-500 mb-1">Carbs</p>
+<p class="text-lg font-bold text-on-surface">22g</p>
+</div>
+<div>
+<p class="text-xs text-stone-500 mb-1">Fat</p>
+<p class="text-lg font-bold text-on-surface">11g</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Subjective Wellness -->
+<section class="bg-surface-container-low p-8 rounded-lg space-y-8">
+<!-- Mood Selector -->
+<div>
+<label class="block text-sm font-bold text-stone-600 mb-4">How are you feeling?</label>
+<div class="flex justify-between gap-2">
+<button class="flex-1 py-4 bg-surface-container-lowest rounded-xl text-2xl hover:scale-110 transition-transform shadow-sm">😊</button>
+<button class="flex-1 py-4 bg-surface-container-lowest rounded-xl text-2xl hover:scale-110 transition-transform border-2 border-primary shadow-sm ring-4 ring-primary/5">😐</button>
+<button class="flex-1 py-4 bg-surface-container-lowest rounded-xl text-2xl hover:scale-110 transition-transform shadow-sm">😴</button>
+<button class="flex-1 py-4 bg-surface-container-lowest rounded-xl text-2xl hover:scale-110 transition-transform shadow-sm">😓</button>
+</div>
+</div>
+<!-- Hunger Slider -->
+<div>
+<div class="flex justify-between items-center mb-4">
+<label class="text-sm font-bold text-stone-600">Hunger level</label>
+<span class="text-primary font-bold">4 / 10</span>
+</div>
+<input class="w-full h-2 bg-surface-container-high rounded-lg appearance-none cursor-pointer" max="10" min="1" type="range" value="4"/>
+<div class="flex justify-between mt-2 text-[10px] uppercase tracking-tighter text-stone-400 font-bold">
+<span>Full</span>
+<span>Satisfied</span>
+<span>Famished</span>
+</div>
+</div>
+<!-- Notes -->
+<div>
+<label class="block text-sm font-bold text-stone-600 mb-4">Mindful Notes</label>
+<textarea class="w-full bg-surface-container-high border-none rounded-xl p-4 text-sm focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-stone-400" placeholder="Add details about your focus, environment, or taste..." rows="3"></textarea>
+</div>
+<!-- Action Button -->
+<button class="w-full h-14 rounded-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold text-lg shadow-lg shadow-primary/20 hover:opacity-90 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        Save Entry
+                    </button>
+</section>
+</div>
+</div>
+<!-- AI Coach Pulse (Floating Glass) -->
+<div class="fixed bottom-8 right-8 max-w-sm glass-panel p-6 rounded-lg diffusion-shadow border border-primary/10 z-40">
+<div class="flex items-center gap-3 mb-3">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center animate-pulse">
+<span class="material-symbols-outlined text-white text-sm" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<span class="text-xs font-bold text-primary tracking-widest uppercase">Coach Insight</span>
+</div>
+<p class="text-sm font-medium text-emerald-900 leading-relaxed">
+                Adding blueberries to your yogurt provides a vital antioxidant boost. Your current protein ratio is perfect for muscle recovery today.
+            </p>
+</div>
+</main>
+<!-- Background Decoration -->
+<div class="fixed top-0 right-0 -z-10 opacity-5 pointer-events-none">
+<img class="w-[800px]" data-alt="Soft ethereal background showing fresh vibrant green vegetables and citrus fruits in a bright minimalist kitchen setting with natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnGLLswobTzaYG5A22CSoIPdadfELRjL_RdXcXPMZXyNSEBustmgZj6rEsNunTUmodvRUT5fY0OtB_Z-k_V8S_r7ew1XH_C4jDv1B0-eMxnM0FtvssJrkgg0gwZJ5TSskv_ceVuqRc7vxpSW4d9f0Kn-91QCerBgfKVCVI6XAOfu1I0Ug4DT7kyFC2lHBboC60Oud4OVT_axjs8SWixafsQtPobluZNlCkqJLBLWmCTqKV8tS_WtZFy1-T5ZweZurdj6mhpXuhPpW9"/>
+</div>
+</body></html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Analytics Dashboard - SmartEat</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "primary-fixed": "#9bf6ba",
+                "error-container": "#ffdad6",
+                "primary": "#006036",
+                "tertiary-fixed": "#ffdada",
+                "on-error": "#ffffff",
+                "surface-container": "#edeeeb",
+                "inverse-surface": "#2e312f",
+                "outline-variant": "#bec9be",
+                "tertiary-container": "#a94e56",
+                "inverse-primary": "#80d9a0",
+                "secondary-fixed-dim": "#ffb955",
+                "surface-bright": "#f9faf7",
+                "on-primary-container": "#abffc6",
+                "on-surface-variant": "#3f4941",
+                "background": "#f9faf7",
+                "secondary-fixed": "#ffddb4",
+                "on-secondary": "#ffffff",
+                "outline": "#6f7a70",
+                "on-secondary-container": "#6b4500",
+                "on-primary-fixed-variant": "#00522e",
+                "surface-container-high": "#e7e8e6",
+                "surface-container-low": "#f3f4f1",
+                "surface-variant": "#e2e3e0",
+                "tertiary": "#8b373f",
+                "on-secondary-fixed": "#291800",
+                "on-tertiary-fixed": "#40000d",
+                "secondary": "#835500",
+                "primary-container": "#1a7a4a",
+                "on-primary-fixed": "#00210f",
+                "on-primary": "#ffffff",
+                "on-tertiary": "#ffffff",
+                "error": "#ba1a1a",
+                "on-surface": "#191c1b",
+                "tertiary-fixed-dim": "#ffb3b6",
+                "surface-dim": "#d9dad8",
+                "inverse-on-surface": "#f0f1ee",
+                "surface-container-highest": "#e2e3e0",
+                "secondary-container": "#feae2c",
+                "surface-container-lowest": "#ffffff",
+                "on-error-container": "#93000a",
+                "surface": "#f9faf7",
+                "surface-tint": "#006d3f",
+                "primary-fixed-dim": "#80d9a0",
+                "on-secondary-fixed-variant": "#633f00",
+                "on-tertiary-fixed-variant": "#7c2b34",
+                "on-background": "#191c1b",
+                "on-tertiary-container": "#ffe7e7"
+            },
+            "borderRadius": {
+                "DEFAULT": "1rem",
+                "lg": "2rem",
+                "xl": "3rem",
+                "full": "9999px"
+            },
+            "fontFamily": {
+                "headline": ["Manrope"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f9faf7; color: #191c1b; }
+        .font-headline { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(24px); }
+        .heatmap-cell { width: 12px; height: 12px; border-radius: 2px; }
+        .chart-bar-protein { background-color: #006036; }
+        .chart-bar-carbs { background-color: #1a7a4a; }
+        .chart-bar-fat { background-color: #feae2c; }
+        .custom-shadow { box-shadow: 0 12px 32px rgba(25, 28, 27, 0.04); }
+    </style>
+</head>
+<body class="bg-surface selection:bg-primary-fixed">
+<!-- SideNavBar Shell -->
+<nav class="fixed left-0 top-0 h-full flex flex-col py-8 px-4 bg-emerald-50/50 dark:bg-stone-900/50 backdrop-blur-xl h-full w-64 border-r border-stone-200/50 dark:border-stone-800/50 z-50">
+<div class="mb-10 px-4">
+<span class="text-2xl font-bold tracking-tight text-emerald-900 dark:text-emerald-50 font-headline">SmartEat</span>
+<p class="text-[10px] uppercase tracking-[0.2em] text-stone-500 font-medium mt-1">Premium Wellness</p>
+</div>
+<div class="space-y-2 flex-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-stone-500 dark:text-stone-400 font-medium hover:text-emerald-800 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-stone-500 dark:text-stone-400 font-medium hover:text-emerald-800 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 transition-colors" href="#">
+<span class="material-symbols-outlined">add_a_photo</span>
+<span class="font-label">Log Meal</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-stone-500 dark:text-stone-400 font-medium hover:text-emerald-800 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 transition-colors" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="font-label">Meal Plan</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-stone-500 dark:text-stone-400 font-medium hover:text-emerald-800 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 transition-colors" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-label">AI Coach</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-stone-500 dark:text-stone-400 font-medium hover:text-emerald-800 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 transition-colors" href="#">
+<span class="material-symbols-outlined">check_circle</span>
+<span class="font-label">Habits</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-emerald-900 dark:text-emerald-400 border-l-4 border-emerald-700 dark:border-emerald-500 font-bold bg-emerald-100/50 dark:bg-emerald-900/20 translate-x-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-label">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-stone-500 dark:text-stone-400 font-medium hover:text-emerald-800 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label">Settings</span>
+</a>
+</div>
+<div class="mt-auto px-4 pt-8 border-t border-stone-200/30">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="close-up portrait of a fitness professional smiling in a brightly lit studio environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBS22yUggzjEhVjXki7_4q1bKposHaO8am1UrU-8sdybTYOp5TLkDkR70hvpetC1NPJJPUuWjfUdT4H9V3OjIihNfhmBoyDkr4HT1q31TnG_y4UMIMC9UcVmnZqgkhUxYmuhfTBEzOiDynJxXJJm_coku1GC2dS5xpnbSYDhz9s9pjFtzbtJLTampvBgUh7nM8i7BOXAOSJb-2pfDXRt9XIuKh79HH9NmWmKbUkEgfK2xjwjQ9-9DXhd2xy1ErJ7s8xtOLqtHHfAc_U"/>
+<div>
+<p class="text-sm font-bold text-on-surface">Alex Rivera</p>
+<p class="text-xs text-stone-500">Gold Member</p>
+</div>
+</div>
+</div>
+</nav>
+<!-- TopNavBar Shell -->
+<header class="flex justify-between items-center w-full h-20 px-8 ml-64 max-w-[calc(100%-16rem)] bg-stone-50 dark:bg-stone-950 fixed top-0 z-40">
+<div class="flex items-center bg-surface-container-high rounded-full px-4 py-2 w-96">
+<span class="material-symbols-outlined text-outline mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-outline" placeholder="Search analytics..." type="text"/>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-stone-600 hover:opacity-80 transition-opacity"><span class="material-symbols-outlined">cloud</span></button>
+<button class="relative text-stone-600 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-secondary rounded-full"></span>
+</button>
+<div class="h-8 w-[1px] bg-outline-variant/30 mx-2"></div>
+<div class="flex items-center gap-3">
+<span class="font-label text-sm font-medium text-on-surface-variant">Weekly Report</span>
+<span class="material-symbols-outlined text-primary">calendar_today</span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-24 px-8 pb-12 min-h-screen">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-12">
+<div>
+<h1 class="text-display-lg font-headline font-bold text-on-surface tracking-tight leading-tight">Your Health <br/><span class="text-primary italic">Deep Dive.</span></h1>
+<p class="text-body-lg text-on-surface-variant mt-2 max-w-md">Detailed insights into your nutritional velocity and habit consistency over the last 7 days.</p>
+</div>
+<!-- Streak Leaderboard Widget -->
+<div class="bg-surface-container-lowest custom-shadow p-6 rounded-lg flex items-center gap-8 border border-outline-variant/10">
+<div class="text-center">
+<p class="text-label-md text-outline uppercase tracking-wider mb-1">Current Streak</p>
+<div class="flex items-center justify-center gap-1">
+<span class="text-3xl font-headline font-bold text-secondary">12</span>
+<span class="material-symbols-outlined text-secondary text-2xl" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+</div>
+<div class="w-[1px] h-10 bg-outline-variant/30"></div>
+<div class="text-center">
+<p class="text-label-md text-outline uppercase tracking-wider mb-1">Longest Streak</p>
+<div class="flex items-center justify-center gap-1">
+<span class="text-3xl font-headline font-bold text-primary">30</span>
+<span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">emoji_events</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Section 1: Weekly Calorie Intake (Line Chart Visualization) -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-lowest custom-shadow rounded-lg p-8">
+<div class="flex justify-between items-start mb-8">
+<div>
+<h3 class="text-title-lg font-headline font-bold text-on-surface">Calorie Velocity</h3>
+<p class="text-label-md text-outline">Target: 2,400 kcal/day</p>
+</div>
+<div class="bg-primary-container/10 px-3 py-1 rounded-full text-primary text-xs font-bold">
+                        +4% vs last week
+                    </div>
+</div>
+<!-- Visual Mock of Line Chart -->
+<div class="relative h-64 w-full flex items-end justify-between gap-2 border-b border-outline-variant/20 pb-4">
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-10">
+<div class="border-t border-outline"></div>
+<div class="border-t border-outline"></div>
+<div class="border-t border-outline"></div>
+</div>
+<!-- Chart Lines/Path logic represented visually -->
+<div class="group relative flex-1 flex flex-col items-center justify-end h-full">
+<div class="w-3 h-3 rounded-full bg-primary border-2 border-white absolute bottom-[40%]"></div>
+<div class="text-[10px] text-outline font-medium mt-2">MON</div>
+</div>
+<div class="group relative flex-1 flex flex-col items-center justify-end h-full">
+<div class="w-3 h-3 rounded-full bg-primary border-2 border-white absolute bottom-[55%]"></div>
+<div class="text-[10px] text-outline font-medium mt-2">TUE</div>
+</div>
+<div class="group relative flex-1 flex flex-col items-center justify-end h-full">
+<div class="w-3 h-3 rounded-full bg-primary border-2 border-white absolute bottom-[48%]"></div>
+<div class="text-[10px] text-outline font-medium mt-2">WED</div>
+</div>
+<div class="group relative flex-1 flex flex-col items-center justify-end h-full">
+<div class="w-3 h-3 rounded-full bg-primary border-2 border-white absolute bottom-[70%]"></div>
+<div class="text-[10px] text-outline font-medium mt-2">THU</div>
+</div>
+<div class="group relative flex-1 flex flex-col items-center justify-end h-full">
+<div class="w-3 h-3 rounded-full bg-primary border-2 border-white absolute bottom-[62%]"></div>
+<div class="text-[10px] text-outline font-medium mt-2">FRI</div>
+</div>
+<div class="group relative flex-1 flex flex-col items-center justify-end h-full">
+<div class="w-3 h-3 rounded-full bg-primary border-2 border-white absolute bottom-[35%]"></div>
+<div class="text-[10px] text-outline font-medium mt-2">SAT</div>
+</div>
+<div class="group relative flex-1 flex flex-col items-center justify-end h-full">
+<div class="w-3 h-3 rounded-full bg-primary border-2 border-white absolute bottom-[50%]"></div>
+<div class="text-[10px] text-outline font-medium mt-2">SUN</div>
+</div>
+<svg class="absolute inset-0 w-full h-full pointer-events-none" viewbox="0 0 700 256">
+<path d="M50,154 L150,115 L250,133 L350,77 L450,97 L550,166 L650,128" fill="none" stroke="#006036" stroke-linecap="round" stroke-width="4"></path>
+</svg>
+</div>
+</div>
+<!-- Section 5: AI Insights Cards (Vertical stack) -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-4">
+<div class="bg-surface-container-lowest p-6 rounded-lg custom-shadow border-l-4 border-primary">
+<div class="flex items-center gap-4 mb-3">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<h4 class="font-headline font-bold text-on-surface">Protein Deficit</h4>
+</div>
+<p class="text-body-lg text-on-surface-variant text-sm">You are 15g below your protein goal on average. Consider adding Greek yogurt to your breakfast.</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg custom-shadow border-l-4 border-secondary">
+<div class="flex items-center gap-4 mb-3">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">bedtime</span>
+</div>
+<h4 class="font-headline font-bold text-on-surface">Late Night Spike</h4>
+</div>
+<p class="text-body-lg text-on-surface-variant text-sm">Most sugar intake happens after 9 PM. Swapping late snacks for tea could improve sleep quality.</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg custom-shadow border-l-4 border-primary-container">
+<div class="flex items-center gap-4 mb-3">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<h4 class="font-headline font-bold text-on-surface">Energy Patterns</h4>
+</div>
+<p class="text-body-lg text-on-surface-variant text-sm">Consistency is high! You've logged meals at the same time for 5 days straight. Keep it up.</p>
+</div>
+</div>
+<!-- Section 2: Macro Breakdown (Stacked Bar Chart) -->
+<div class="col-span-12 lg:col-span-6 bg-surface-container-lowest custom-shadow rounded-lg p-8">
+<div class="flex justify-between items-center mb-8">
+<h3 class="text-title-lg font-headline font-bold text-on-surface">Weekly Macros</h3>
+<div class="flex gap-4">
+<div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full chart-bar-protein"></div><span class="text-[10px] font-bold text-outline">P</span></div>
+<div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full chart-bar-carbs"></div><span class="text-[10px] font-bold text-outline">C</span></div>
+<div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full chart-bar-fat"></div><span class="text-[10px] font-bold text-outline">F</span></div>
+</div>
+</div>
+<div class="flex justify-between items-end h-56 gap-4">
+<!-- Monday -->
+<div class="flex-1 flex flex-col gap-1 items-center h-full justify-end">
+<div class="w-full flex flex-col-reverse rounded-sm overflow-hidden h-4/5">
+<div class="chart-bar-protein h-[30%]"></div>
+<div class="chart-bar-carbs h-[45%]"></div>
+<div class="chart-bar-fat h-[25%]"></div>
+</div>
+<span class="text-[10px] text-outline font-medium">M</span>
+</div>
+<!-- Tuesday -->
+<div class="flex-1 flex flex-col gap-1 items-center h-full justify-end">
+<div class="w-full flex flex-col-reverse rounded-sm overflow-hidden h-full">
+<div class="chart-bar-protein h-[25%]"></div>
+<div class="chart-bar-carbs h-[50%]"></div>
+<div class="chart-bar-fat h-[25%]"></div>
+</div>
+<span class="text-[10px] text-outline font-medium">T</span>
+</div>
+<!-- Wednesday -->
+<div class="flex-1 flex flex-col gap-1 items-center h-full justify-end">
+<div class="w-full flex flex-col-reverse rounded-sm overflow-hidden h-3/5">
+<div class="chart-bar-protein h-[40%]"></div>
+<div class="chart-bar-carbs h-[35%]"></div>
+<div class="chart-bar-fat h-[25%]"></div>
+</div>
+<span class="text-[10px] text-outline font-medium">W</span>
+</div>
+<!-- Thursday -->
+<div class="flex-1 flex flex-col gap-1 items-center h-full justify-end">
+<div class="w-full flex flex-col-reverse rounded-sm overflow-hidden h-[90%]">
+<div class="chart-bar-protein h-[35%]"></div>
+<div class="chart-bar-carbs h-[40%]"></div>
+<div class="chart-bar-fat h-[25%]"></div>
+</div>
+<span class="text-[10px] text-outline font-medium">T</span>
+</div>
+<!-- Friday -->
+<div class="flex-1 flex flex-col gap-1 items-center h-full justify-end">
+<div class="w-full flex flex-col-reverse rounded-sm overflow-hidden h-[85%]">
+<div class="chart-bar-protein h-[30%]"></div>
+<div class="chart-bar-carbs h-[40%]"></div>
+<div class="chart-bar-fat h-[30%]"></div>
+</div>
+<span class="text-[10px] text-outline font-medium">F</span>
+</div>
+<!-- Saturday -->
+<div class="flex-1 flex flex-col gap-1 items-center h-full justify-end">
+<div class="w-full flex flex-col-reverse rounded-sm overflow-hidden h-1/2">
+<div class="chart-bar-protein h-[20%]"></div>
+<div class="chart-bar-carbs h-[60%]"></div>
+<div class="chart-bar-fat h-[20%]"></div>
+</div>
+<span class="text-[10px] text-outline font-medium">S</span>
+</div>
+<!-- Sunday -->
+<div class="flex-1 flex flex-col gap-1 items-center h-full justify-end">
+<div class="w-full flex flex-col-reverse rounded-sm overflow-hidden h-3/4">
+<div class="chart-bar-protein h-[35%]"></div>
+<div class="chart-bar-carbs h-[40%]"></div>
+<div class="chart-bar-fat h-[25%]"></div>
+</div>
+<span class="text-[10px] text-outline font-medium">S</span>
+</div>
+</div>
+</div>
+<!-- Section 4: Top Foods Logged (Horizontal Bar Chart) -->
+<div class="col-span-12 lg:col-span-6 bg-surface-container-lowest custom-shadow rounded-lg p-8">
+<h3 class="text-title-lg font-headline font-bold text-on-surface mb-8">Weekly Favorites</h3>
+<div class="space-y-6">
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-bold text-on-surface-variant">
+<span>Avocado Toast</span>
+<span>4 times</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full w-[80%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-bold text-on-surface-variant">
+<span>Grilled Chicken Salad</span>
+<span>3 times</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full w-[60%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-bold text-on-surface-variant">
+<span>Almond Butter</span>
+<span>3 times</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full w-[60%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-bold text-on-surface-variant">
+<span>Blueberry Smoothie</span>
+<span>2 times</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary-container rounded-full w-[40%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 3: Habit Heatmap -->
+<div class="col-span-12 bg-surface-container-lowest custom-shadow rounded-lg p-8">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+<div>
+<h3 class="text-title-lg font-headline font-bold text-on-surface">Consistency Grid</h3>
+<p class="text-label-md text-outline">Past 90 days of ritual adherence</p>
+</div>
+<div class="flex items-center gap-2 text-[10px] text-outline font-bold">
+<span>Less</span>
+<div class="heatmap-cell bg-surface-container"></div>
+<div class="heatmap-cell bg-primary/20"></div>
+<div class="heatmap-cell bg-primary/40"></div>
+<div class="heatmap-cell bg-primary/70"></div>
+<div class="heatmap-cell bg-primary"></div>
+<span>More</span>
+</div>
+</div>
+<div class="overflow-x-auto pb-4">
+<div class="flex flex-col gap-1 min-w-[800px]">
+<!-- Visual representation of a 7x13 grid roughly -->
+<div class="flex gap-1">
+<div class="heatmap-cell bg-primary"></div><div class="heatmap-cell bg-primary/70"></div><div class="heatmap-cell bg-primary/20"></div><div class="heatmap-cell bg-surface-container"></div><div class="heatmap-cell bg-primary/40"></div><div class="heatmap-cell bg-primary"></div><div class="heatmap-cell bg-primary"></div><div class="heatmap-cell bg-primary/70"></div><div class="heatmap-cell bg-primary"></div><div class="heatmap-cell bg-primary/40"></div><div class="heatmap-cell bg-primary"></div><div class="heatmap-cell bg-primary/70"></div><div class="heatmap-cell bg-primary/20"></div>
+</div>
+<div class="flex gap-1">
+<div class="heatmap-cell bg-primary/40"></div><div class="heatmap-cell bg-primary"></div><div class="heatmap-cell bg-primary/70"></div><div class="heatmap-cell bg-primary/40"></div><div class="heatmap-cell bg-surface-container"></div><div class="heatmap-cell bg-primary/20"></div><div class="heatmap-cell bg-primary/70"></div><div class="heatmap-cell bg-primary"></div><div class="heatmap-cell bg-primary/20"></div><div class="heatmap-cell bg-primary/70"></div><div class="heatmap-cell bg-primary/40"></div><div class="heatmap-cell bg-primary"></div><div class="heatmap-cell bg-primary/70"></div>
+</div>
+<div class="flex gap-1">
+<div class="heatmap-cell bg-surface-container"></div><div class="heatmap-cell bg-primary/20"></div><div class="heatmap-cell bg-primary/40"></div><div class="heatmap-cell bg-primary/70"></div><div class="heatmap-cell bg-primary"></div><div class="heatmap-cell bg-primary"></div><div class="heatmap-cell bg-primary/70"></div><div class="heatmap-cell bg-primary/40"></div><div class="heatmap-cell bg-surface-container"></div><div class="heatmap-cell bg-primary/20"></div><div class="heatmap-cell bg-primary"></div><div class="heatmap-cell bg-primary/70"></div><div class="heatmap-cell bg-primary/40"></div>
+</div>
+<div class="flex gap-1">
+<div class="heatmap-cell bg-primary/70"></div><div class="heatmap-cell bg-primary"></div><div class="heatmap-cell bg-primary/70"></div><div class="heatmap-cell bg-primary/40"></div><div class="heatmap-cell bg-primary/20"></div><div class="heatmap-cell bg-surface-container"></div><div class="heatmap-cell bg-primary/40"></div><div class="heatmap-cell bg-primary/70"></div><div class="heatmap-cell bg-primary"></div><div class="heatmap-cell bg-primary/70"></div><div class="heatmap-cell bg-primary/40"></div><div class="heatmap-cell bg-primary/20"></div><div class="heatmap-cell bg-primary"></div>
+</div>
+<div class="flex gap-1">
+<div class="heatmap-cell bg-primary/20"></div><div class="heatmap-cell bg-primary/40"></div><div class="heatmap-cell bg-primary/70"></div><div class="heatmap-cell bg-primary"></div><div class="heatmap-cell bg-primary"></div><div class="heatmap-cell bg-primary/70"></div><div class="heatmap-cell bg-primary/40"></div><div class="heatmap-cell bg-primary/20"></div><div class="heatmap-cell bg-surface-container"></div><div class="heatmap-cell bg-primary/20"></div><div class="heatmap-cell bg-primary/40"></div><div class="heatmap-cell bg-primary/70"></div><div class="heatmap-cell bg-primary"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- AI Coach Pulse FAB -->
+<div class="fixed bottom-8 right-8 z-50">
+<button class="w-16 h-16 rounded-full bg-primary flex items-center justify-center text-white custom-shadow border-4 border-primary-container/20 group relative">
+<span class="material-symbols-outlined text-3xl">psychology</span>
+<span class="absolute -top-12 right-0 bg-surface-container-lowest text-on-surface text-[10px] font-bold px-3 py-1 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Ask Coach</span>
+</button>
+</div>
+</body></html>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SmartEat — Weekly Meal Plan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#9bf6ba",
+                        "error-container": "#ffdad6",
+                        "primary": "#006036",
+                        "tertiary-fixed": "#ffdada",
+                        "on-error": "#ffffff",
+                        "surface-container": "#edeeeb",
+                        "inverse-surface": "#2e312f",
+                        "outline-variant": "#bec9be",
+                        "tertiary-container": "#a94e56",
+                        "inverse-primary": "#80d9a0",
+                        "secondary-fixed-dim": "#ffb955",
+                        "surface-bright": "#f9faf7",
+                        "on-primary-container": "#abffc6",
+                        "on-surface-variant": "#3f4941",
+                        "background": "#f9faf7",
+                        "secondary-fixed": "#ffddb4",
+                        "on-secondary": "#ffffff",
+                        "outline": "#6f7a70",
+                        "on-secondary-container": "#6b4500",
+                        "on-primary-fixed-variant": "#00522e",
+                        "surface-container-high": "#e7e8e6",
+                        "surface-container-low": "#f3f4f1",
+                        "surface-variant": "#e2e3e0",
+                        "tertiary": "#8b373f",
+                        "on-secondary-fixed": "#291800",
+                        "on-tertiary-fixed": "#40000d",
+                        "secondary": "#835500",
+                        "primary-container": "#1a7a4a",
+                        "on-primary-fixed": "#00210f",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-surface": "#191c1b",
+                        "tertiary-fixed-dim": "#ffb3b6",
+                        "surface-dim": "#d9dad8",
+                        "inverse-on-surface": "#f0f1ee",
+                        "surface-container-highest": "#e2e3e0",
+                        "secondary-container": "#feae2c",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface": "#f9faf7",
+                        "surface-tint": "#006d3f",
+                        "primary-fixed-dim": "#80d9a0",
+                        "on-secondary-fixed-variant": "#633f00",
+                        "on-tertiary-fixed-variant": "#7c2b34",
+                        "on-background": "#191c1b",
+                        "on-tertiary-container": "#ffe7e7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav-border {
+            border-left: 4px solid #00522e;
+        }
+        .editorial-shadow {
+            box-shadow: 0 12px 32px rgba(25, 28, 27, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-8 px-4 bg-emerald-50/50 dark:bg-stone-900/50 backdrop-blur-xl h-full w-64 border-r border-stone-200/50 dark:border-stone-800/50">
+<div class="mb-10 px-4">
+<h1 class="text-2xl font-bold tracking-tight text-emerald-900 dark:text-emerald-50 font-headline">SmartEat</h1>
+<p class="text-xs font-medium text-stone-500 tracking-widest uppercase mt-1">Premium Wellness</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-500 dark:text-stone-400 font-medium hover:text-emerald-800 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 transition-colors group" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-500 dark:text-stone-400 font-medium hover:text-emerald-800 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 transition-colors group" href="#">
+<span class="material-symbols-outlined" data-icon="add_a_photo">add_a_photo</span>
+<span>Log Meal</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-emerald-900 dark:text-emerald-400 border-l-4 border-emerald-700 dark:border-emerald-500 font-bold bg-emerald-100/50 dark:bg-emerald-900/20 translate-x-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="restaurant_menu" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+<span>Meal Plan</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-500 dark:text-stone-400 font-medium hover:text-emerald-800 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 transition-colors group" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span>AI Coach</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-500 dark:text-stone-400 font-medium hover:text-emerald-800 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 transition-colors group" href="#">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+<span>Habits</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-500 dark:text-stone-400 font-medium hover:text-emerald-800 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 transition-colors group" href="#">
+<span class="material-symbols-outlined" data-icon="leaderboard">leaderboard</span>
+<span>Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-500 dark:text-stone-400 font-medium hover:text-emerald-800 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 transition-colors group mt-auto" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-64 min-h-screen">
+<!-- Top Navigation -->
+<header class="flex justify-between items-center w-full h-20 px-8 sticky top-0 bg-stone-50/80 backdrop-blur-md z-10 transition-all">
+<div class="flex items-center gap-4 bg-surface-container-high rounded-full px-4 py-2 w-96">
+<span class="material-symbols-outlined text-outline" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full font-body" placeholder="Search recipes or ingredients..." type="text"/>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-stone-600 dark:text-stone-400 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="cloud">cloud</span>
+</button>
+<button class="text-stone-600 dark:text-stone-400 hover:opacity-80 transition-opacity relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-tertiary rounded-full"></span>
+</button>
+<div class="flex items-center gap-3 pl-6 border-l border-outline-variant/30">
+<div class="text-right">
+<p class="text-sm font-bold text-emerald-900">Alex Rivera</p>
+<p class="text-[10px] text-stone-500 font-label uppercase tracking-tighter">Premium Member</p>
+</div>
+<img alt="User profile" class="w-10 h-10 rounded-full object-cover ring-2 ring-primary-fixed" data-alt="Close-up portrait of a smiling young man with dark hair in a soft-lit indoor setting, professional photography style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTLRNvDUnELjX0J6qP6IDle2Rr05olQTGazAtaAmRStfJ6ZZeL09tNWX5G_LQ7mkASECG7VDf0TRuE1ua0rrllDf0hCrI1_9bxwZ4WMH-L_OyuORr1Ys2yNAeCiLsLK3OTIqdOTOGV4sfQqPVv0vlTTQU6zZrNHzgN9paMc3g8yYI-PqlglrBLM6kDYM0Ml5wYRfWZ3UxrKYA-bSHnRAjdKujKPS_2JZD2R7dgEOZBvv6BjA6NUl5nTbC_nF-OYsjOcg2Tpeh0OhZi"/>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="p-8 max-w-[1600px] mx-auto">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div class="space-y-2">
+<div class="flex items-center gap-4 mb-2">
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold font-label">WEEKLY PLAN</span>
+<div class="flex items-center gap-2 bg-secondary-container/20 text-on-secondary-fixed px-3 py-1 rounded-full text-xs font-bold font-label">
+<span class="material-symbols-outlined text-sm" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                            Target: 2100 kcal
+                        </div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-surface-container rounded-full transition-colors text-outline">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<h2 class="text-4xl font-extrabold font-headline tracking-tight text-on-surface">Week of April 14–20</h2>
+<button class="p-2 hover:bg-surface-container rounded-full transition-colors text-outline">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<button class="flex items-center gap-3 px-8 py-4 rounded-full font-bold text-on-primary shadow-lg shadow-primary/20 bg-gradient-to-br from-primary to-primary-container transition-transform active:scale-95">
+<span>Generate New Plan with AI</span>
+<span class="material-symbols-outlined text-xl" data-icon="auto_awesome">auto_awesome</span>
+</button>
+</div>
+<!-- Weekly Grid Layout -->
+<div class="grid grid-cols-7 gap-4">
+<!-- Day Headers -->
+<div class="col-span-1 text-center pb-4">
+<p class="text-xs font-bold text-outline font-label uppercase tracking-widest">Mon 14</p>
+</div>
+<div class="col-span-1 text-center pb-4">
+<p class="text-xs font-bold text-outline font-label uppercase tracking-widest">Tue 15</p>
+</div>
+<div class="col-span-1 text-center pb-4">
+<p class="text-xs font-bold text-outline font-label uppercase tracking-widest">Wed 16</p>
+</div>
+<div class="col-span-1 text-center pb-4">
+<p class="text-xs font-bold text-primary font-label uppercase tracking-widest">Thu 17</p>
+<div class="w-1 h-1 bg-primary rounded-full mx-auto mt-1"></div>
+</div>
+<div class="col-span-1 text-center pb-4">
+<p class="text-xs font-bold text-outline font-label uppercase tracking-widest">Fri 18</p>
+</div>
+<div class="col-span-1 text-center pb-4">
+<p class="text-xs font-bold text-outline font-label uppercase tracking-widest">Sat 19</p>
+</div>
+<div class="col-span-1 text-center pb-4">
+<p class="text-xs font-bold text-outline font-label uppercase tracking-widest">Sun 20</p>
+</div>
+<!-- Row: Breakfast -->
+<!-- Column Labels on the side could go here but let's use section headings for mobile responsiveness focus or just labels inside cards -->
+<!-- Breakfast Row -->
+<!-- Mon -->
+<div class="space-y-4">
+<p class="text-[10px] font-bold text-outline/50 uppercase tracking-[0.2em] mb-2 pl-2">Breakfast</p>
+<div class="bg-surface-container-lowest editorial-shadow rounded-lg p-3 group cursor-pointer hover:bg-surface-container transition-all">
+<img class="w-full h-24 object-cover rounded-md mb-3" data-alt="Close-up of a bowl of overnight oats with fresh blueberries, sliced strawberries, and a sprinkle of chia seeds, bright morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCALhfLAp6SQkzays5jOnmhY8am7GaNcFKiXCWOyLQI_gSGOhLRf4YahO-JX_a2YRbo4y6A0PLrZwe7drKaU56eze4L5I7RdSJENCfDmRjr1jR1IaSvhdeKzqtjV-HZUoGfVWOFZoB_xNebNKk5uEKnIsRLhRwaWTLXUQAQ0v_3QixmUJ4Cgj1uUxQVBH_b-z5mY8e-Pnz2fCtxJroIBcrZBb9dnPgMlIudKbkJN36srKtcNTzh-kb8bszU7oh_w_WQ7jL4swX1xTrh"/>
+<h4 class="text-sm font-bold text-on-surface leading-tight mb-2">Blueberry Overnight Oats</h4>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">320 kcal</span>
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">5m prep</span>
+</div>
+</div>
+</div>
+<!-- Tue -->
+<div class="space-y-4 pt-6">
+<div class="bg-surface-container-lowest editorial-shadow rounded-lg p-3 group cursor-pointer hover:bg-surface-container transition-all">
+<img class="w-full h-24 object-cover rounded-md mb-3" data-alt="Avocado toast on artisan sourdough bread with a poached egg and red pepper flakes, clean minimal aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAj5NgdvcdV7eDxV0V7zrjHOG5mztwYoUm3-llqKprYAcmvfBWQIKSWNB4rUPxzIGnsk2AcBQsFxXJNCqxUNbtuY3imSZJKEkzthb8JDT6H21AoHS8bLOX6rOZmXHi7LE_bUu9Fsg9wqXBdOMIoRYwP3gbLyzrBSvGxyEOBND2330Nu2WbN1MSYqHTGdBg3DrSGv1-EEHlXmXrOIRDIOXTFNhdbs1mjQICQWIK15qor48YBGwWY0YqEEaDyT37lSsKPCPczetRLrTBp"/>
+<h4 class="text-sm font-bold text-on-surface leading-tight mb-2">Avocado Poached Toast</h4>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">410 kcal</span>
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">12m prep</span>
+</div>
+</div>
+</div>
+<!-- Wed -->
+<div class="space-y-4 pt-6">
+<div class="bg-surface-container-lowest editorial-shadow rounded-lg p-3 group cursor-pointer hover:bg-surface-container transition-all">
+<img class="w-full h-24 object-cover rounded-md mb-3" data-alt="Greek yogurt bowl with golden honey drizzle and toasted walnuts in a ceramic bowl, warm editorial lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPDN_aBOnT5Su9F_bwueyv1kx1lnCR9SEi20qNgIL5ZBBbf2XKi1czFjTNfecI_OPlOErA0omJa7uEAHC0T2bKJPAAuO5_RGbZ9WSY-SFfapGhecfnq5AkIikpu9d2135BZQNtOrjvd11ItgManiC4YOWvTw9uX0R8cHjqtslcoDBQAGjScb0kao5907iAmaGSU6HKopI2WO52fWaJktXRcryT-2JIzRBrUAlF8KVhGdrlB4o_-IJo6p57u7FJCuwjwK2K8dPpaPGJ"/>
+<h4 class="text-sm font-bold text-on-surface leading-tight mb-2">Greek Honey Bowl</h4>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">280 kcal</span>
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">3m prep</span>
+</div>
+</div>
+</div>
+<!-- Thu -->
+<div class="space-y-4 pt-6 relative">
+<div class="bg-primary/5 absolute -inset-2 rounded-xl border border-primary/10 -z-10"></div>
+<div class="bg-surface-container-lowest editorial-shadow rounded-lg p-3 group cursor-pointer ring-2 ring-primary/20 hover:bg-surface-container transition-all">
+<img class="w-full h-24 object-cover rounded-md mb-3" data-alt="Fluffy banana pancakes stacked with a pat of melting butter and maple syrup on a white plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVoF70xxZUrTWYC6Gxu-3oZBPg_hg6IJOYPAmCMWcTGiirgZttYVmxyY31wSanAd6YD8222G7Zv1i2RqBnJkJZd_UvYFCshtVoOt7KUKw9c4jKUNilSIGAZfKedCxuuwP9zeFDJRAX1MvHx-DnkgZMe_oxG_moBpXpoXJhE1QlE5BGyQ_ogTiC03cMvmyzeYnJS3A4E4fdNj3KlzY6YxJVwLDxs-liqfPXdKPo4VLP5Lh8veXX-i-3oqXLyS-dTqPG1UqaU2zjbeXo"/>
+<h4 class="text-sm font-bold text-primary leading-tight mb-2">AI Choice: Protein Pancakes</h4>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-medium bg-primary/10 px-2 py-0.5 rounded text-primary">350 kcal</span>
+<span class="text-[10px] font-medium bg-primary/10 px-2 py-0.5 rounded text-primary">15m prep</span>
+</div>
+</div>
+</div>
+<!-- Fri -->
+<div class="space-y-4 pt-6">
+<div class="bg-surface-container-lowest editorial-shadow rounded-lg p-3 group cursor-pointer hover:bg-surface-container transition-all">
+<img class="w-full h-24 object-cover rounded-md mb-3" data-alt="Two hard boiled eggs cut in half on a wooden board with a side of spinach and cherry tomatoes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDT-eU7VgSRcGHaKNYpHFlicwmAr_nz_IaCmUPwYUY4S-QNQ6JMPglr8Z-_-EsFdeTfmzLb7IZtcUjFkU7gToua6j5mdQ07IEmyLmUJylMcf9SoKNNj13KyRqcm7THgsrbTJpsvR25UCzhOn_q81J1BLalUmqoStvaHzKW9pNryDnGb5Yk27fVlgOCbxPrETvas314VQOq64_inNImQLDowYerr4bpVHTmyCuGCRxfKeET4X0sLWktoEPwf3ep7UPTEQOwudF8zCu_A"/>
+<h4 class="text-sm font-bold text-on-surface leading-tight mb-2">Spinach Egg Power Plate</h4>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">210 kcal</span>
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">10m prep</span>
+</div>
+</div>
+</div>
+<!-- Sat -->
+<div class="space-y-4 pt-6">
+<div class="bg-surface-container-lowest editorial-shadow rounded-lg p-3 group cursor-pointer hover:bg-surface-container transition-all">
+<img class="w-full h-24 object-cover rounded-md mb-3" data-alt="Tofu scramble with turmeric, kale, and peppers in a cast iron skillet, bright morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNcm4YFBUlqJttu7mAQuBqOlF_01ft6owJY8GymujjyFtygQpttajj5SSBhawMOdrsm0o7Qrnf3qup5nkBmIPJPEwzrOVftm998ECp6JX-gPInn4fusot864s_t-MkEoe-xnViKz3iW6Fs5TUFT7t3tlKcrjmQzYgiCMdt0iUsXuyVGYKHryBUOlxmNq5ja3vtQf35qF_YSlryFFIqfKMxfH0yqyai5HRMMd1FcsEglHYtAy4d-i41sLhtY0cjYoV8r3dGqLisIh_4"/>
+<h4 class="text-sm font-bold text-on-surface leading-tight mb-2">Garden Tofu Scramble</h4>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">330 kcal</span>
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">20m prep</span>
+</div>
+</div>
+</div>
+<!-- Sun -->
+<div class="space-y-4 pt-6">
+<div class="bg-surface-container-lowest editorial-shadow rounded-lg p-3 group cursor-pointer hover:bg-surface-container transition-all">
+<img class="w-full h-24 object-cover rounded-md mb-3" data-alt="Breakfast smoothie with spinach, green apple, and ginger in a glass bottle on a light background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvksyNVPqWhJFGkxac5QUz2m0-h4OyJ24KNOhfB-f8b8vhOlQ8viVJ0f5UDuKGszqqRWAEo7iUGrB8EgFF9TCxRgNKP67uLCe258vBT_lyXz9elwwno4QRd3MTAu2z_svzxQnhz8XrUHdX3eyZwfI0G9rsJOW-VgIIlGy5t2S8FoIUmVyiCvd25lIwkCQCoeZTN3K626bxd3ua9vf3hgGQUzG2sMgUMiT-2_WExYn3s_k_Geicwc3ahsDaPCO3GVe7WSCtAOnZz6p4"/>
+<h4 class="text-sm font-bold text-on-surface leading-tight mb-2">Detox Green Smoothie</h4>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">190 kcal</span>
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">5m prep</span>
+</div>
+</div>
+</div>
+<!-- Lunch Row -->
+<!-- Mon -->
+<div class="space-y-4">
+<p class="text-[10px] font-bold text-outline/50 uppercase tracking-[0.2em] mb-2 pl-2">Lunch</p>
+<div class="bg-surface-container-lowest editorial-shadow rounded-lg p-3 group cursor-pointer hover:bg-surface-container transition-all">
+<img class="w-full h-24 object-cover rounded-md mb-3" data-alt="Vibrant Mediterranean salad with chickpeas, cucumber, feta cheese, and olives in a white bowl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnfEFGMz0be1B0hH8JhNTog0In_-Nqgew3Wxi4XnVlTBZcUvBRmfMtWlczkhLgllEeakw_aRiqMboN56v-6njeRAZN-inAZvMMUqRF8_tjgl145TJoClUNJcQPJkTh_o_c2HSSY9Np0hNMZEzR4YXIaRiLsb_3gogyjvWQcK8aXbFgON5BcIED5L-Ht8wjnfMYOKdpOwGAZRXOPUligikKNqiCGwOobJlzCbgErul1B801dw05a1BCsE8MsUXKfkw3zLZThbIE3SFr"/>
+<h4 class="text-sm font-bold text-on-surface leading-tight mb-2">Mediterranean Chickpea Salad</h4>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">450 kcal</span>
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">15m prep</span>
+</div>
+</div>
+</div>
+<!-- Tue -->
+<div class="space-y-4 pt-6">
+<div class="bg-surface-container-lowest editorial-shadow rounded-lg p-3 group cursor-pointer hover:bg-surface-container transition-all">
+<img class="w-full h-24 object-cover rounded-md mb-3" data-alt="Quinoa buddha bowl with roasted sweet potato, kale, and tahini dressing, high-end editorial food photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABQPD7d4v45j8fRqvQ2DSBjhAClf7lChH47Nw9DlrTuF9j9sMvbPIHLnZuSugSLCe3GtCETWnwmDv3o_XxE3Xcx3nbWGYpl1cdCWX6tP7FjFOuoYd2Na0E2Xf0ExViqmSG6f5CQW9ctdrQLFNeUpow6LZ-JT5na5PpfMjEY8obkYR-X1mTDSNaX2ss3LYxJzcBlh1-o72-VE2SOP_49VbQmbAZTfOkh_mBQ5D1RJ6C8ySUlKFE_syffNY9hsN4zzMTGGA6VLfyR95S"/>
+<h4 class="text-sm font-bold text-on-surface leading-tight mb-2">Quinoa Buddha Bowl</h4>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">520 kcal</span>
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">25m prep</span>
+</div>
+</div>
+</div>
+<!-- Wed -->
+<div class="space-y-4 pt-6">
+<div class="bg-surface-container-lowest editorial-shadow rounded-lg p-3 group cursor-pointer hover:bg-surface-container transition-all">
+<img class="w-full h-24 object-cover rounded-md mb-3" data-alt="Grilled chicken breast strips on a bed of fresh greens with avocado slices and citrus vinaigrette" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxQ8fajDAkOVfshvufkUtWJVED6RPVtWEiwbxdNrLhg2sU5XGFKOcf_-9DqY-uBOxU3hErTquMeomr7iUH2x_XvF69RREzFavKphsivBRAlXeIRQIy08Gv1UOSzNtNwGU9q-qLDfXym0T7eCFT8druCEBhR6KsJXnOVQWaNdz_8KMvO_RHqkSmYx9r1N-pS95gjPcqnXc228Z0fRLB0eFjhNlpIjQc5E7SyK_u1fUg8zAM_reRhKRJGYl2k3bJ9aLyjut9on5KLqXa"/>
+<h4 class="text-sm font-bold text-on-surface leading-tight mb-2">Lemon Herb Chicken Salad</h4>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">380 kcal</span>
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">20m prep</span>
+</div>
+</div>
+</div>
+<!-- Thu -->
+<div class="space-y-4 pt-6 relative">
+<div class="bg-primary/5 absolute -inset-2 rounded-xl border border-primary/10 -z-10"></div>
+<div class="bg-surface-container-lowest editorial-shadow rounded-lg p-3 group cursor-pointer ring-2 ring-primary/20 hover:bg-surface-container transition-all">
+<img class="w-full h-24 object-cover rounded-md mb-3" data-alt="Sushi poke bowl with fresh tuna, edamame, seaweed salad, and pickled ginger over brown rice" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxIkSGuo-gpKRFlkz5_nRJnEe0Li3YYxLWHcTT6QUYrrKCiyZzkYq70oS7eqbWME40e3nxoKNg-iq1eA91V08zGnBQyWgIaWjaQyyopM8DUYZORxpC9CMFcZD3wwrlnBQfbHkXCTZ6YxRvon2Jm0wu36VpCs0XlrlLnepHY_8VafG7klppJogI2cKpP2IHO4xSfu4H51osx920qd9tGjXwflLrjE4dhrarkiLvkBg6ajuc9Wml2J7upy19VtXHZyhyFSwRi-mkiU_Z"/>
+<h4 class="text-sm font-bold text-primary leading-tight mb-2">Ahi Tuna Poke Bowl</h4>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-medium bg-primary/10 px-2 py-0.5 rounded text-primary">490 kcal</span>
+<span class="text-[10px] font-medium bg-primary/10 px-2 py-0.5 rounded text-primary">10m prep</span>
+</div>
+</div>
+</div>
+<!-- Fri-Sun similar pattern... -->
+<div class="space-y-4 pt-6">
+<div class="bg-surface-container-lowest editorial-shadow rounded-lg p-3 group cursor-pointer hover:bg-surface-container transition-all">
+<div class="w-full h-24 bg-surface-container rounded-md flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-outline/30 text-3xl" data-icon="restaurant">restaurant</span>
+</div>
+<h4 class="text-sm font-bold text-on-surface leading-tight mb-2">Leftover Stir-fry</h4>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">420 kcal</span>
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">5m prep</span>
+</div>
+</div>
+</div>
+<div class="space-y-4 pt-6">
+<div class="bg-surface-container-lowest editorial-shadow rounded-lg p-3 group cursor-pointer hover:bg-surface-container transition-all">
+<div class="w-full h-24 bg-surface-container rounded-md flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-outline/30 text-3xl" data-icon="restaurant">restaurant</span>
+</div>
+<h4 class="text-sm font-bold text-on-surface leading-tight mb-2">Brunch at Café</h4>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">650 kcal</span>
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">Eat Out</span>
+</div>
+</div>
+</div>
+<div class="space-y-4 pt-6">
+<div class="bg-surface-container-lowest editorial-shadow rounded-lg p-3 group cursor-pointer hover:bg-surface-container transition-all">
+<div class="w-full h-24 bg-surface-container rounded-md flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-outline/30 text-3xl" data-icon="restaurant">restaurant</span>
+</div>
+<h4 class="text-sm font-bold text-on-surface leading-tight mb-2">Roast Vegetable Salad</h4>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">340 kcal</span>
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">45m prep</span>
+</div>
+</div>
+</div>
+<!-- Dinner Row Placeholder (For visual rhythm) -->
+<div class="col-span-7 mt-8 mb-4">
+<div class="h-px bg-outline-variant/20 w-full"></div>
+</div>
+<div class="col-span-7 grid grid-cols-7 gap-4">
+<div class="space-y-4">
+<p class="text-[10px] font-bold text-outline/50 uppercase tracking-[0.2em] mb-2 pl-2">Dinner</p>
+<div class="bg-surface-container-lowest editorial-shadow rounded-lg p-3 group cursor-pointer hover:bg-surface-container transition-all">
+<img class="w-full h-24 object-cover rounded-md mb-3" data-alt="Pan-seared salmon fillet with asparagus spears and a lemon wedge on a dark slate plate, professional lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsyfLt5ZrRzWVXcTDPpUxTweZsQ_1x2orfFoNrKRxn2q3lGzLxAmbmhJiWkBbY68R13dFiMfXGkYyQc1NGmNnXfieCOEXW0Ko806pcsqY4AsaDqgGKwbX7ZoZc9rg2tqLwnIHIP-Np8sZmktYu25dFQepsIfvAkjFl6BVnXcdmlHBS13L4nf-HwpWOt4mPh-IAUbU4RWCtCNIh5TrVgr9ClracbWDGCRpODvbD0Z4QcKMuG1fqdGyIapxjB1xsYXjAssKzyeJ7_F9c"/>
+<h4 class="text-sm font-bold text-on-surface leading-tight mb-2">Pan-Seared Salmon</h4>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">580 kcal</span>
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">22m prep</span>
+</div>
+</div>
+</div>
+<div class="pt-6">
+<div class="bg-surface-container-lowest editorial-shadow rounded-lg p-3 group cursor-pointer hover:bg-surface-container transition-all">
+<img class="w-full h-24 object-cover rounded-md mb-3" data-alt="Bowl of spaghetti with tomato sauce, fresh basil, and grated parmesan cheese on a rustic table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7L6KrujRoJ-_EECi7uINJD1b3Uj-rbawDSzkeH8jfpsXc7K17zLk8vs3BXgXsTCGJYUPgpAEvNMsUM8MRx_y0rLm5F6ydbxH5WvRXg2so9PBnCTU8OyugqB9uZz82I1WEuBV6fS5V9VzATBIUrEY4t-jpHDwGryFy9yOMbA5dVa6dYNaLAtBjKOXapyKbJulnrl65DswAIdf5kGUItptkPGUwKJ3urNT7MQpQIkYdotk5GJwElPM_ZVf4kiNCjbf4TL_1zA4Nofr6"/>
+<h4 class="text-sm font-bold text-on-surface leading-tight mb-2">Whole Grain Pomodoro</h4>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">480 kcal</span>
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">18m prep</span>
+</div>
+</div>
+</div>
+<div class="pt-6">
+<div class="bg-surface-container-lowest editorial-shadow rounded-lg p-3 group cursor-pointer hover:bg-surface-container transition-all">
+<div class="w-full h-24 bg-surface-container rounded-md flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-outline/30 text-3xl" data-icon="dinner_dining">dinner_dining</span>
+</div>
+<h4 class="text-sm font-bold text-on-surface leading-tight mb-2">Turkey Chili</h4>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">510 kcal</span>
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">35m prep</span>
+</div>
+</div>
+</div>
+<!-- Thursday Highlighted AI Lunch -->
+<div class="pt-6 relative">
+<div class="bg-primary/5 absolute -inset-2 rounded-xl border border-primary/10 -z-10"></div>
+<div class="bg-surface-container-lowest editorial-shadow rounded-lg p-3 group cursor-pointer ring-2 ring-primary/20 hover:bg-surface-container transition-all">
+<img class="w-full h-24 object-cover rounded-md mb-3" data-alt="Beef tenderloin with roasted root vegetables and a red wine reduction, gourmet presentation" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4kqXJDeBnBsTaM7Pdi6az1ws03y8YaRuYsi2Ka4daN2V257gzMSdS_J966dLaVv63TmYZlV6or3fz0N2oQSRz5nbgzZy5Qw_D6_OXkICgQhwn1waIsAultJIlmkoteoldYWtbdfvbxQCnvdV02I5B9R_yupBdSAHvEm6lNDh1ITxxMUwNkFxUmKGmNKqDzuOD19r9QHS24LmJ16XiDaeYTyZ5qsKzhQ9wQJll0mAtTETuMLfcQ7hfANLhA6PAheSYuP7nWvfUHpXw"/>
+<h4 class="text-sm font-bold text-primary leading-tight mb-2">AI Choice: Steak &amp; Roots</h4>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-medium bg-primary/10 px-2 py-0.5 rounded text-primary">620 kcal</span>
+<span class="text-[10px] font-medium bg-primary/10 px-2 py-0.5 rounded text-primary">30m prep</span>
+</div>
+</div>
+</div>
+<div class="pt-6">
+<div class="bg-surface-container-lowest editorial-shadow rounded-lg p-3 group cursor-pointer hover:bg-surface-container transition-all">
+<div class="w-full h-24 bg-surface-container rounded-md flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-outline/30 text-3xl" data-icon="dinner_dining">dinner_dining</span>
+</div>
+<h4 class="text-sm font-bold text-on-surface leading-tight mb-2">Tofu Stir-fry</h4>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">410 kcal</span>
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">25m prep</span>
+</div>
+</div>
+</div>
+<div class="pt-6">
+<div class="bg-surface-container-lowest editorial-shadow rounded-lg p-3 group cursor-pointer hover:bg-surface-container transition-all">
+<div class="w-full h-24 bg-surface-container rounded-md flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-outline/30 text-3xl" data-icon="dinner_dining">dinner_dining</span>
+</div>
+<h4 class="text-sm font-bold text-on-surface leading-tight mb-2">Homemade Pizza</h4>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">750 kcal</span>
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">45m prep</span>
+</div>
+</div>
+</div>
+<div class="pt-6">
+<div class="bg-surface-container-lowest editorial-shadow rounded-lg p-3 group cursor-pointer hover:bg-surface-container transition-all">
+<div class="w-full h-24 bg-surface-container rounded-md flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-outline/30 text-3xl" data-icon="dinner_dining">dinner_dining</span>
+</div>
+<h4 class="text-sm font-bold text-on-surface leading-tight mb-2">Sunday Roast</h4>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">680 kcal</span>
+<span class="text-[10px] font-medium bg-surface-container px-2 py-0.5 rounded text-outline">90m prep</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating AI Coach Pulse (Design System Custom Component) -->
+<div class="fixed bottom-10 right-10 z-50">
+<div class="relative group">
+<div class="absolute -inset-4 bg-primary/20 rounded-full blur-xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
+<div class="relative bg-surface/70 backdrop-blur-xl editorial-shadow rounded-2xl p-4 flex items-center gap-4 max-w-sm border border-outline-variant/20">
+<div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+</div>
+<div>
+<p class="text-[10px] font-bold text-primary uppercase tracking-widest mb-1">AI INSIGHT</p>
+<p class="text-sm font-medium leading-tight text-on-surface-variant">Your Wednesday lunch looks low on fiber. Shall I swap it for a grain bowl?</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

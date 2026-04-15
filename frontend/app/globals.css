@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+/* ─── Design tokens ─────────────────────────────────────────── */
+:root {
+  --primary: #006036;
+  --primary-container: #1a7a4a;
+  --surface: #f9faf7;
+  --on-surface: #191c1b;
+}
+
+/* ─── Base ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f9faf7;
+  color: #191c1b;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Manrope', sans-serif;
+}
+
+/* ─── Material Symbols ─────────────────────────────────────── */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  vertical-align: middle;
+}
+
+.material-symbols-filled {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* ─── Utility classes ───────────────────────────────────────── */
+.signature-gradient {
+  background: linear-gradient(135deg, #006036 0%, #1a7a4a 100%);
+}
+
+.diffusion-shadow {
+  box-shadow: 0 12px 32px rgba(25, 28, 27, 0.04);
+}
+
+.glass-panel {
+  background: rgba(249, 250, 247, 0.8);
+  backdrop-filter: blur(24px);
+}
+
+/* ─── Range slider thumb ────────────────────────────────────── */
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background: #006036;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #bec9be; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #6f7a70; }
+
+/* ─── Selection ─────────────────────────────────────────────── */
+::selection { background: #9bf6ba; }
