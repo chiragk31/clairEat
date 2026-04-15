@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
 import MealCard from '@/components/MealCard';
-import Sidebar from '@/components/Sidebar';
-import TopBar from '@/components/TopBar';
 
 export const metadata: Metadata = {
   title: 'Weekly Meal Plan — clairEat',
@@ -52,12 +50,8 @@ const MEAL_BG = ['bg-emerald-50','bg-amber-50','bg-sky-50','bg-rose-50','bg-viol
 
 export default function MealPlanPage() {
   return (
-    <div className="min-h-screen bg-[#f9faf7]">
-      <Sidebar />
-      <div className="ml-64 flex flex-col">
-        <TopBar placeholder="Search recipes or ingredients..." />
-
-        <main className="p-8 max-w-[1600px] mx-auto">
+    <>
+      <div className="p-8 max-w-[1600px] mx-auto">
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
             <div className="space-y-3">
@@ -128,26 +122,7 @@ export default function MealPlanPage() {
               ))}
             </div>
           </div>
-        </main>
       </div>
-
-      {/* AI Pulse */}
-      <div className="fixed bottom-10 right-10 z-50">
-        <div className="relative group">
-          <div className="absolute -inset-4 bg-[#006036]/20 rounded-full blur-xl opacity-50 group-hover:opacity-100 transition-opacity" />
-          <div className="relative glass-panel diffusion-shadow rounded-2xl p-4 flex items-center gap-4 max-w-xs border border-[#bec9be]/20">
-            <div className="w-12 h-12 rounded-full signature-gradient flex items-center justify-center text-white shrink-0">
-              <span className="material-symbols-outlined">psychology</span>
-            </div>
-            <div>
-              <p className="text-[10px] font-bold text-[#006036] uppercase tracking-widest mb-1">AI Insight</p>
-              <p className="text-sm font-medium leading-tight text-[#3f4941]">
-                Your Wednesday lunch looks low on fiber. Shall I swap it for a grain bowl?
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    </>
   );
 }

@@ -1,6 +1,4 @@
 import type { Metadata } from 'next';
-import Sidebar from '@/components/Sidebar';
-import TopBar from '@/components/TopBar';
 import WellnessSection from '@/components/WellnessSection';
 
 export const metadata: Metadata = {
@@ -69,12 +67,8 @@ const TIPS = [
 
 export default function WellnessPage() {
   return (
-    <div className="min-h-screen bg-[#f9faf7]">
-      <Sidebar />
-      <div className="ml-64 flex flex-col">
-        <TopBar placeholder="Search wellness topics..." />
-
-        <main className="px-8 pb-16 pt-8">
+    <>
+      <div className="px-8 pb-16 pt-8 max-w-7xl mx-auto">
 
           {/* ── Hero header ─────────────────────────── */}
           <div className="mb-12">
@@ -156,8 +150,7 @@ export default function WellnessPage() {
               View Recommendations
             </button>
           </div>
-        </main>
       </div>
-    </div>
+    </>
   );
 }

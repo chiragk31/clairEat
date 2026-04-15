@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   description: 'Your AI-powered nutrition coach for personalized meal plans and intelligent health insights.',
 };
 
+import MainLayout from '@/components/layout/MainLayout';
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -26,7 +28,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <MainLayout>{children}</MainLayout>
+      </body>
     </html>
   );
 }

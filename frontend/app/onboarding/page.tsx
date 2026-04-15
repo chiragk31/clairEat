@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-
+import { Button } from '@/components/ui/Button';
+import { Input } from '@/components/ui/Input';
 const STEPS = ['Welcome', 'Personal Blueprint', 'Goals & Diet', 'Ready to Go'];
 
 const GOAL_OPTIONS = ['Weight Loss', 'Muscle Gain', 'Maintenance', 'Diabetes Control'];
@@ -147,21 +148,20 @@ export default function OnboardingPage() {
             <div className="space-y-6">
               <div className="grid grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-sm font-semibold text-[#3f4941] mb-2">Full Name</label>
-                  <input
+                  <label className="block text-sm font-semibold text-on-surface-variant mb-2">Full Name</label>
+                  <Input
                     type="text"
                     value={form.name}
                     onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
                     placeholder="e.g. Alex Rivera"
-                    className="w-full h-14 bg-[#e7e8e6] border-none rounded-md px-4 outline-none focus:ring-2 focus:ring-[#006036]/20 text-[#191c1b] placeholder:text-stone-400"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-[#3f4941] mb-2">Gender</label>
+                  <label className="block text-sm font-semibold text-on-surface-variant mb-2">Gender</label>
                   <select
                     value={form.gender}
                     onChange={e => setForm(p => ({ ...p, gender: e.target.value }))}
-                    className="w-full h-14 bg-[#e7e8e6] border-none rounded-md px-4 outline-none focus:ring-2 focus:ring-[#006036]/20 text-[#191c1b]"
+                    className="w-full h-14 bg-surface-container border-none rounded-xl px-4 outline-none focus:ring-2 focus:ring-primary/20 text-on-surface"
                   >
                     <option value="">Select Gender</option>
                     <option>Female</option><option>Male</option>
@@ -177,13 +177,12 @@ export default function OnboardingPage() {
                   { label: 'Weight', key: 'weight', placeholder: 'kg', type: 'text' },
                 ].map(f => (
                   <div key={f.key}>
-                    <label className="block text-sm font-semibold text-[#3f4941] mb-2">{f.label}</label>
-                    <input
+                    <label className="block text-sm font-semibold text-on-surface-variant mb-2">{f.label}</label>
+                    <Input
                       type={f.type}
                       value={form[f.key as keyof FormData] as string}
                       onChange={e => setForm(p => ({ ...p, [f.key]: e.target.value }))}
                       placeholder={f.placeholder}
-                      className="w-full h-14 bg-[#e7e8e6] border-none rounded-md px-4 outline-none focus:ring-2 focus:ring-[#006036]/20 text-[#191c1b]"
                     />
                   </div>
                 ))}
@@ -244,17 +243,14 @@ export default function OnboardingPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-[#3f4941] mb-2">Specific Allergies</label>
-                <div className="flex items-center gap-3 h-14 bg-[#e7e8e6] rounded-md px-4">
-                  <span className="material-symbols-outlined text-[#6f7a70]">search</span>
-                  <input
-                    type="text"
-                    value={form.allergies}
-                    onChange={e => setForm(p => ({ ...p, allergies: e.target.value }))}
-                    placeholder="Add ingredients to avoid..."
-                    className="bg-transparent border-none outline-none w-full text-[#191c1b] placeholder:text-stone-400"
-                  />
-                </div>
+                <label className="block text-sm font-semibold text-on-surface-variant mb-2">Specific Allergies</label>
+                <Input
+                  icon="search"
+                  type="text"
+                  value={form.allergies}
+                  onChange={e => setForm(p => ({ ...p, allergies: e.target.value }))}
+                  placeholder="Add ingredients to avoid..."
+                />
               </div>
             </div>
           )}
@@ -293,29 +289,31 @@ export default function OnboardingPage() {
           {/* Navigation buttons */}
           <div className="pt-10 flex items-center justify-between">
             {step > 1 ? (
-              <button
+              <Button
+                variant="ghost"
                 onClick={() => setStep(s => s - 1)}
-                className="text-[#006036] font-semibold flex items-center gap-2 hover:opacity-70 transition-opacity"
+                className="gap-2 text-primary"
               >
                 <span className="material-symbols-outlined">arrow_back</span>
                 Back
-              </button>
+              </Button>
             ) : (
               <div />
             )}
 
             {step < STEPS.length ? (
-              <button
+              <Button
+                variant="primary"
                 onClick={() => setStep(s => s + 1)}
-                className="signature-gradient text-white h-12 px-10 rounded-full flex items-center gap-2 font-semibold diffusion-shadow hover:scale-[1.02] active:scale-[0.98] transition-all"
+                className="gap-2 px-10 h-12 text-white signature-gradient"
               >
                 Continue
                 <span className="material-symbols-outlined">arrow_forward</span>
-              </button>
+              </Button>
             ) : (
               <Link
                 href="/"
-                className="signature-gradient text-white h-12 px-10 rounded-full flex items-center gap-2 font-semibold diffusion-shadow hover:scale-[1.02] active:scale-[0.98] transition-all"
+                className="inline-flex items-center justify-center font-bold font-sans rounded-full transition-all active:scale-95 disabled:opacity-50 disabled:pointer-events-none bg-primary text-on-primary hover:bg-primary/90 shadow-md gap-2 px-10 h-12 text-white signature-gradient"
               >
                 Go to Dashboard
                 <span className="material-symbols-outlined">arrow_forward</span>
