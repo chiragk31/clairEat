@@ -17,11 +17,11 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="fixed left-0 top-0 h-full flex flex-col py-8 px-4 bg-emerald-50/50 backdrop-blur-xl w-64 border-r border-stone-200/50 z-50">
+    <aside className="fixed left-0 top-0 h-full flex flex-col py-8 px-4 bg-surface-container/50 backdrop-blur-xl w-64 border-r border-outline-variant/30 z-50">
       {/* Brand */}
       <div className="mb-12 px-4">
-        <h1 className="text-2xl font-bold tracking-tight text-emerald-900 font-headline">clairEat</h1>
-        <p className="text-[10px] uppercase tracking-widest text-stone-500 font-bold mt-1">Premium Wellness</p>
+        <h1 className="text-2xl font-bold tracking-tight text-primary font-headline">clairEat</h1>
+        <p className="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold mt-1">Premium Wellness</p>
       </div>
 
       {/* Nav links */}
@@ -34,8 +34,8 @@ export default function Sidebar() {
               href={href}
               className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 font-medium ${
                 isActive
-                  ? 'text-emerald-900 border-l-4 border-emerald-700 font-bold bg-emerald-100/50 translate-x-1'
-                  : 'text-stone-500 hover:text-emerald-800 hover:bg-emerald-50'
+                  ? 'text-primary border-l-4 border-primary font-bold bg-primary-container/20 translate-x-1'
+                  : 'text-on-surface-variant hover:text-primary hover:bg-surface-container'
               }`}
             >
               <span
@@ -52,7 +52,7 @@ export default function Sidebar() {
         {/* Settings at bottom */}
         <Link
           href="/settings"
-          className="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors text-stone-500 hover:text-emerald-800 hover:bg-emerald-50 mt-8"
+          className="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors text-on-surface-variant hover:text-primary hover:bg-surface-container mt-8"
         >
           <span className="material-symbols-outlined">settings</span>
           <span>Settings</span>
@@ -60,13 +60,13 @@ export default function Sidebar() {
       </nav>
 
       {/* User profile footer */}
-      <div className="mt-auto px-4 flex items-center gap-3 pt-6 border-t border-stone-200/50">
-        <div className="w-10 h-10 rounded-full bg-emerald-200 flex items-center justify-center text-emerald-900 font-bold text-sm">
+      <div className="mt-auto px-4 flex items-center gap-3 pt-6 border-t border-outline-variant/30">
+        <div className="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center text-primary font-bold text-sm">
           AR
         </div>
         <div>
           <p className="text-sm font-bold text-on-surface">Alex Rivera</p>
-          <p className="text-[10px] text-stone-500 uppercase font-bold tracking-tighter">Premium Member</p>
+          <p className="text-[10px] text-on-surface-variant uppercase font-bold tracking-tighter">Premium Member</p>
         </div>
       </div>
     </aside>

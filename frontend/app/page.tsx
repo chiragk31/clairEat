@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
-import Sidebar from '@/components/Sidebar';
-import TopBar from '@/components/TopBar';
 import SummaryCard from '@/components/SummaryCard';
-
+import { Card } from '@/components/ui/Card';
 export const metadata: Metadata = {
   title: 'Dashboard — clairEat',
   description: 'Your personalized nutrition dashboard with daily tracking, meal logs, and AI insights.',
@@ -15,7 +13,7 @@ const MEALS = [
     label: 'Breakfast',
     icon: 'coffee',
     iconBg: 'bg-emerald-50',
-    iconColor: 'text-[#006036]',
+    iconColor: 'text-primary',
     detail: 'Oats with Berries, Espresso',
     kcal: '420 kcal',
     time: '08:30 AM',
@@ -26,7 +24,7 @@ const MEALS = [
     label: 'Lunch',
     icon: 'lunch_dining',
     iconBg: 'bg-amber-50',
-    iconColor: 'text-[#835500]',
+    iconColor: 'text-secondary',
     detail: 'Grilled Chicken Salad, Quinoa',
     kcal: '680 kcal',
     time: '01:15 PM',
@@ -37,7 +35,7 @@ const MEALS = [
     label: 'Dinner',
     icon: 'dinner_dining',
     iconBg: 'bg-stone-100',
-    iconColor: 'text-[#3f4941]',
+    iconColor: 'text-on-surface-variant',
     detail: 'Not logged yet',
     kcal: null,
     time: null,
@@ -57,21 +55,17 @@ const MEALS = [
 ];
 
 const MACROS = [
-  { label: 'Protein', val: '62g', pct: 45, color: 'bg-[#006036]' },
+  { label: 'Protein', val: '62g', pct: 45, color: 'bg-primary' },
   { label: 'Carbs',   val: '145g', pct: 70, color: 'bg-[#feae2c]' },
-  { label: 'Fat',     val: '38g',  pct: 30, color: 'bg-[#3f4941]' },
+  { label: 'Fat',     val: '38g',  pct: 30, color: 'bg-on-surface-variant' },
 ];
 
 const WEEK_DAYS = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
 export default function DashboardPage() {
   return (
-    <div className="min-h-screen bg-[#f9faf7]">
-      <Sidebar />
-      <div className="ml-64 flex flex-col min-h-screen">
-        <TopBar placeholder="Search foods or recipes..." />
-
-        <main className="px-8 pb-12 pt-8 grid grid-cols-12 gap-8">
+    <div className="w-full">
+      <main className="px-4 md:px-8 pt-8 grid grid-cols-12 gap-8">
 
           {/* ── Center: Tracking & Meals ─────────────────── */}
           <div className="col-span-12 lg:col-span-8 space-y-10">
@@ -79,10 +73,10 @@ export default function DashboardPage() {
             {/* Greeting */}
             <div className="flex justify-between items-end">
               <div>
-                <h1 className="text-3xl font-bold font-headline text-[#191c1b] tracking-tight">
+                <h1 className="text-3xl font-bold font-headline text-on-surface tracking-tight">
                   Good morning, Chirag 👋
                 </h1>
-                <p className="text-[#3f4941] font-medium mt-1">Tuesday, April 14</p>
+                <p className="text-on-surface-variant font-medium mt-1">Tuesday, April 14</p>
               </div>
               <div className="flex items-center gap-3 bg-[#f3f4f1] px-5 py-3 rounded-lg">
                 <span className="material-symbols-outlined text-[#835500]" style={{ fontVariationSettings: "'FILL' 1" }}>
@@ -98,23 +92,23 @@ export default function DashboardPage() {
             {/* Bento summary grid */}
             <div className="grid grid-cols-3 gap-6">
               {/* Calorie ring card */}
-              <div className="col-span-2 bg-white rounded-lg p-8 diffusion-shadow flex items-center justify-between">
+              <Card variant="elevated" className="col-span-2 flex items-center justify-between">
                 <div className="space-y-6 flex-1">
                   <div>
-                    <h3 className="text-[#3f4941] text-sm font-medium">Daily Energy</h3>
+                    <h3 className="text-on-surface-variant text-sm font-medium">Daily Energy</h3>
                     <div className="flex items-baseline gap-2 mt-2">
-                      <span className="text-4xl font-bold text-[#191c1b] font-headline">1,240</span>
-                      <span className="text-[#3f4941]">/ 2,100 kcal</span>
+                       <span className="text-4xl font-bold text-on-surface font-headline">1,240</span>
+                       <span className="text-on-surface-variant">/ 2,100 kcal</span>
                     </div>
                   </div>
                   <div className="grid grid-cols-3 gap-4 pt-4">
                     {MACROS.map(m => (
                       <div key={m.label} className="space-y-2">
-                        <p className="text-[10px] font-bold text-[#3f4941] uppercase">{m.label}</p>
-                        <div className="h-1.5 bg-[#edeeeb] rounded-full overflow-hidden">
-                          <div className={`h-full ${m.color} rounded-full`} style={{ width: `${m.pct}%` }} />
-                        </div>
-                        <p className="text-xs font-semibold">{m.val}</p>
+                         <p className="text-[10px] font-bold text-on-surface-variant uppercase">{m.label}</p>
+                         <div className="h-1.5 bg-surface-container rounded-full overflow-hidden">
+                           <div className={`h-full ${m.color} rounded-full`} style={{ width: `${m.pct}%` }} />
+                         </div>
+                         <p className="text-xs font-semibold">{m.val}</p>
                       </div>
                     ))}
                   </div>
@@ -122,35 +116,35 @@ export default function DashboardPage() {
                 {/* Radial progress */}
                 <div className="relative w-40 h-40 flex items-center justify-center shrink-0">
                   <svg className="w-full h-full transform -rotate-90">
-                    <circle className="text-[#edeeeb]" cx="80" cy="80" fill="transparent" r="70" stroke="currentColor" strokeWidth="12" />
-                    <circle
-                      className="text-[#006036]"
-                      cx="80" cy="80" fill="transparent" r="70"
-                      stroke="currentColor"
-                      strokeDasharray="440"
-                      strokeDashoffset="180"
-                      strokeLinecap="round"
-                      strokeWidth="12"
-                    />
+                     <circle className="text-surface-container-high" cx="80" cy="80" fill="transparent" r="70" stroke="currentColor" strokeWidth="12" />
+                     <circle
+                       className="text-primary"
+                       cx="80" cy="80" fill="transparent" r="70"
+                       stroke="currentColor"
+                       strokeDasharray="440"
+                       strokeDashoffset="180"
+                       strokeLinecap="round"
+                       strokeWidth="12"
+                     />
                   </svg>
                   <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <span className="text-2xl font-bold font-headline">59%</span>
-                    <span className="text-[10px] text-[#3f4941] font-bold uppercase">Done</span>
+                     <span className="text-2xl font-bold font-headline">59%</span>
+                     <span className="text-[10px] text-on-surface-variant font-bold uppercase">Done</span>
                   </div>
                 </div>
-              </div>
+              </Card>
 
               {/* Featured card */}
-              <div className="bg-[#006036] rounded-lg overflow-hidden relative p-6 flex flex-col justify-end text-white">
-                <div className="absolute inset-0 opacity-20 bg-gradient-to-br from-emerald-400 to-emerald-900" />
+              <Card variant="filled" className="bg-primary/90 text-white relative overflow-hidden flex flex-col justify-end p-6 border-none">
+                <div className="absolute inset-0 opacity-20 bg-gradient-to-br from-primary-fixed to-primary" />
                 <div className="relative z-10">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#9bf6ba]">Featured Guide</span>
-                  <h4 className="text-xl font-bold font-headline leading-tight mt-2">Optimal Post-Workout Macros</h4>
-                  <button className="mt-4 text-xs font-bold flex items-center gap-2 hover:translate-x-1 transition-transform">
-                    Read Article <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                  </button>
+                   <span className="text-[10px] font-bold uppercase tracking-widest text-primary-fixed">Featured Guide</span>
+                   <h4 className="text-xl font-bold font-headline leading-tight mt-2">Optimal Post-Workout Macros</h4>
+                   <button className="mt-4 text-xs font-bold flex items-center gap-2 hover:translate-x-1 transition-transform truncate text-white">
+                     Read Article <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                   </button>
                 </div>
-              </div>
+              </Card>
             </div>
 
             {/* Meals section */}
@@ -163,43 +157,43 @@ export default function DashboardPage() {
                 </button>
               </div>
 
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {MEALS.map(meal => (
-                  <div
+                  <Card
                     key={meal.id}
-                    className="bg-white p-5 rounded-lg group hover:shadow-md transition-all diffusion-shadow"
+                    variant="elevated"
+                    padding="sm"
+                    className="group hover:shadow-md transition-all flex items-center justify-between"
                   >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4">
-                        <div className={`w-12 h-12 rounded-md ${meal.iconBg} flex items-center justify-center ${meal.iconColor}`}>
-                          <span className="material-symbols-outlined">{meal.icon}</span>
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-[#191c1b]">{meal.label}</h4>
-                          <p className={`text-xs ${meal.logged ? 'text-[#3f4941]' : 'text-stone-400 italic'}`}>
-                            {meal.logged ? `Logged: ${meal.detail}` : meal.detail}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-5">
-                        {meal.logged ? (
-                          <>
-                            <div className="text-right">
-                              <p className="text-sm font-bold text-[#191c1b]">{meal.kcal}</p>
-                              <p className="text-[10px] text-[#3f4941] uppercase font-bold">{meal.time}</p>
-                            </div>
-                            <button className="w-8 h-8 rounded-full border border-[#bec9be] flex items-center justify-center text-[#006036] hover:bg-[#006036] hover:text-white transition-colors">
-                              <span className="material-symbols-outlined text-lg">add</span>
-                            </button>
-                          </>
-                        ) : (
-                          <button className="px-4 py-1.5 signature-gradient text-white text-xs font-bold rounded-full">
-                            + Add Meal
-                          </button>
-                        )}
-                      </div>
+                    <div className="flex items-center gap-4">
+                       <div className={`w-12 h-12 rounded-lg ${meal.iconBg} flex items-center justify-center ${meal.iconColor}`}>
+                         <span className="material-symbols-outlined">{meal.icon}</span>
+                       </div>
+                       <div>
+                         <h4 className="font-bold text-on-surface">{meal.label}</h4>
+                         <p className={`text-xs ${meal.logged ? 'text-on-surface-variant' : 'text-outline italic'}`}>
+                           {meal.logged ? `Logged: ${meal.detail}` : meal.detail}
+                         </p>
+                       </div>
                     </div>
-                  </div>
+                    <div className="flex items-center gap-5">
+                       {meal.logged ? (
+                         <>
+                           <div className="text-right">
+                             <p className="text-sm font-bold text-on-surface">{meal.kcal}</p>
+                             <p className="text-[10px] text-on-surface-variant uppercase font-bold">{meal.time}</p>
+                           </div>
+                           <button className="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+                             <span className="material-symbols-outlined text-lg">add</span>
+                           </button>
+                         </>
+                       ) : (
+                         <button className="px-4 py-1.5 signature-gradient text-white text-xs font-bold rounded-full">
+                           + Add Meal
+                         </button>
+                       )}
+                    </div>
+                  </Card>
                 ))}
               </div>
             </section>
@@ -279,11 +273,9 @@ export default function DashboardPage() {
             </div>
           </div>
         </main>
-      </div>
-
       {/* AI FAB */}
-      <button className="fixed bottom-8 right-8 w-16 h-16 signature-gradient text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-105 transition-transform group z-50">
-        <span className="material-symbols-outlined text-3xl group-hover:rotate-12 transition-transform">auto_awesome</span>
+      <button className="fixed bottom-8 right-8 w-14 h-14 md:w-16 md:h-16 signature-gradient text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-105 transition-transform group z-50">
+        <span className="material-symbols-outlined text-2xl md:text-3xl group-hover:rotate-12 transition-transform">auto_awesome</span>
       </button>
     </div>
   );

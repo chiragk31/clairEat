@@ -1,6 +1,4 @@
 import type { Metadata } from 'next';
-import Sidebar from '@/components/Sidebar';
-import TopBar from '@/components/TopBar';
 import DashboardCard from '@/components/DashboardCard';
 
 export const metadata: Metadata = {
@@ -82,12 +80,8 @@ function heatCell(val: string) {
 
 export default function AnalyticsPage() {
   return (
-    <div className="min-h-screen bg-[#f9faf7]">
-      <Sidebar />
-      <div className="ml-64 flex flex-col">
-        <TopBar placeholder="Search analytics..." />
-
-        <main className="px-8 pb-12 pt-8">
+    <>
+      <div className="px-8 pb-12 pt-8 max-w-[1600px] mx-auto">
           {/* ── Header ──────────────────────────────────── */}
           <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-12">
             <div>
@@ -265,18 +259,7 @@ export default function AnalyticsPage() {
               </div>
             </div>
           </div>
-        </main>
       </div>
-
-      {/* AI FAB */}
-      <div className="fixed bottom-8 right-8 z-50">
-        <button className="w-16 h-16 rounded-full bg-[#006036] flex items-center justify-center text-white diffusion-shadow border-4 border-[#1a7a4a]/20 group relative">
-          <span className="material-symbols-outlined text-3xl">psychology</span>
-          <span className="absolute -top-10 right-0 bg-white text-[#191c1b] text-[10px] font-bold px-3 py-1 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-            Ask Coach
-          </span>
-        </button>
-      </div>
-    </div>
+    </>
   );
 }

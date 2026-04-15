@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import Sidebar from '@/components/Sidebar';
 import MessageBubble from '@/components/MessageBubble';
 import { Message } from '@/types/chat';
 
@@ -101,10 +100,7 @@ export default function AiCoachPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f9faf7]">
-      <Sidebar />
-
-      <main className="ml-64 flex h-screen overflow-hidden">
+    <div className="flex h-[calc(100vh-80px)] overflow-hidden w-full">
         {/* ── Conversation list ─────────────────────── */}
         <div className="w-72 bg-[#f3f4f1] flex flex-col border-r border-[#bec9be]/10 shrink-0">
           <div className="p-7 pb-4">
@@ -136,9 +132,9 @@ export default function AiCoachPage() {
         </div>
 
         {/* ── Chat area ─────────────────────────────── */}
-        <div className="flex-1 flex flex-col bg-white/30 backdrop-blur-sm">
+        <div className="flex-1 flex flex-col bg-white">
           {/* Chat header */}
-          <header className="h-20 flex items-center justify-between px-8 bg-[#f9faf7]/90 backdrop-blur-md sticky top-0 z-10 border-b border-stone-100">
+          <header className="h-16 flex items-center justify-between px-8 bg-surface border-b border-outline-variant/30 hidden">
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-full signature-gradient flex items-center justify-center text-white">
                 <span className="material-symbols-outlined text-base" style={{ fontVariationSettings: "'FILL' 1" }}>psychology</span>
@@ -241,7 +237,6 @@ export default function AiCoachPage() {
             </div>
           </footer>
         </div>
-      </main>
     </div>
   );
 }
